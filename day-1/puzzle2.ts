@@ -1,5 +1,7 @@
 'use strict'
 
+export {}
+
 declare function require(path: string): any;
 const fs = require('fs');
 

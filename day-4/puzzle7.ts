@@ -81,9 +81,6 @@ for (let i = 0; i < chrono.length; i++) {
   }
 }
 
-console.log(guardSleep)
-console.log(mostSleptMinutes)
-
 let mostSleptMinuteTimes = 0
 
 for (let key in mostSleptMinutes) {

@@ -19,10 +19,6 @@ let chrono = inputArray.sort(function (a, b) {
   return a.match(dateRegEx)[0].replace(/[-: ]/g, '') - b.match(dateRegEx)[0].replace(/[-: ]/g, '')
 })
 
-/* for (let i = 0; i < 11; i++) {
-  console.log(chrono[i])
-} */
-
 let guardSleep = {}
 let currentGuard = ''
 let startSleep = 0
@@ -33,15 +29,11 @@ for (let i = 0; i < chrono.length-1; i++) {
   
   if (chrono[i].match(/#[0-9]*/)) {
     currentGuard = chrono[i].match(/#[0-9]*/)[0]
-    //console.log(currentGuard)
   } else if (chrono[i].indexOf('asleep') != -1) {
     startSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':',''))
-    //console.log('start sleeping at: ' + String(startSleep))
   } else if (chrono[i].indexOf('wakes') != -1) {
     stopSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':',''))
-    //console.log('stop sleeping at: ' + String(stopSleep))
     sleepTime = stopSleep - startSleep
-    //console.log('slept for: ' + String(sleepTime))
     if (guardSleep[currentGuard]) {
       guardSleep[currentGuard] += sleepTime
     } else {

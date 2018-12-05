@@ -50,9 +50,12 @@ for (let key in guardSleep) {
   }
 }
 
+let mostSleepyGuard = ''
+
 for (let key in guardSleep) {
   if (guardSleep[key] == maxSleep) {
-    console.log(key)
+    mostSleepyGuard = key
   }
 }
 
+console.log(mostSleepyGuard)

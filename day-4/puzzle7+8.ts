@@ -25,14 +25,14 @@ let startSleep = 0
 let stopSleep = 0
 let sleepTime = 0
 
-for (let i = 0; i < chrono.length-1; i++) {
+for (let i = 0; i < chrono.length; i++) {
   
   if (chrono[i].match(/#[0-9]*/)) {
     currentGuard = chrono[i].match(/#[0-9]*/)[0]
   } else if (chrono[i].indexOf('asleep') != -1) {
-    startSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':',''))
+    startSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':', ''))
   } else if (chrono[i].indexOf('wakes') != -1) {
-    stopSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':',''))
+    stopSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':', ''))
     sleepTime = stopSleep - startSleep
     if (guardSleep[currentGuard]) {
       guardSleep[currentGuard] += sleepTime
@@ -45,7 +45,7 @@ for (let i = 0; i < chrono.length-1; i++) {
 let maxSleep = 0
 
 for (let key in guardSleep) {
-  if (guardSleep[key] > maxSleep) {
+  if (guardSleep[key] >= maxSleep) {
     maxSleep = guardSleep[key]
   }
 }
@@ -53,9 +53,51 @@ for (let key in guardSleep) {
 let mostSleepyGuard = ''
 
 for (let key in guardSleep) {
-  if (guardSleep[key] == maxSleep) {
+  if (guardSleep[key] === maxSleep) {
     mostSleepyGuard = key
   }
 }
 
-console.log(mostSleepyGuard)
+let mostSleptMinutes = {}
+
+for (let i = 0; i < chrono.length; i++) {
+  if (chrono[i].match(/#[0-9]*/)) {
+    currentGuard = chrono[i].match(/#[0-9]*/)[0]
+  }
+  if (currentGuard === mostSleepyGuard) {
+    if (chrono[i].indexOf('asleep') != -1) {
+      startSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':', ''))
+    } else if (chrono[i].indexOf('wakes') != -1) {
+      stopSleep = Number(chrono[i].match(/:[0-9]*/)[0].replace(':', ''))
+      for (let j = startSleep; j < stopSleep; j++) {
+        let key = 'm' + j
+        if (mostSleptMinutes[key]) {
+          mostSleptMinutes[key]++
+        } else {
+          mostSleptMinutes[key] = 1
+        }
+      }
+    }
+  }
+}
+
+console.log(guardSleep)
+console.log(mostSleptMinutes)
+
+let mostSleptMinuteTimes = 0
+
+for (let key in mostSleptMinutes) {
+  if (mostSleptMinutes[key] >= mostSleptMinuteTimes) {
+    mostSleptMinuteTimes = mostSleptMinutes[key]
+  }
+}
+
+let mostSleptMinute
+
+for (let key in mostSleptMinutes) {
+  if (mostSleptMinutes[key] === mostSleptMinuteTimes) {
+    mostSleptMinute = Number(key.replace('m', ''))
+  }
+}
+
+console.log(Number(mostSleepyGuard.replace('#', '')) * mostSleptMinute)

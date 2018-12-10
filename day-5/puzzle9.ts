@@ -18,9 +18,10 @@ while (itsOn) {
     ) {
       polymer.splice(i,2)
       itsOn = true
+      break
     }
   }
 }
 
-console.log(polymer.length -1)
+console.log(polymer.length)
 console.log(polymer[polymer.length-3], polymer[polymer.length-2], polymer[polymer.length-1])

@@ -32,10 +32,27 @@ while(on) {
   on = false
   manualFiltered.forEach( elem => {
     if ( values[elem[0]] <= values[elem[1]]) {
-      values[elem[0]] = values[elem[1]] +1
+      values[elem[0]] = values[elem[1]] + 1
       on = true
     }
   })
 }
 
-console.log(values)
+let order = []
+
+for (let i=13; i>=0; i--) {
+  let step = []
+  for (let key in values) {
+    if (values[key] == i) {
+      step.push(key)
+    }
+  }
+  order.push(step)
+}
+
+let sortedOrder = order.map( elem => elem.sort())
+
+console.log(sortedOrder)
+
+// GJFNVWBEMDHYACTUILQSPXZORK
+// gjfnvwbemdhyactuilqspxzork

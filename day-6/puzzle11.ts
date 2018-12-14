@@ -33,3 +33,43 @@ newCoord.forEach(elem => {
 });
 
 console.log(minX, minY, maxX, maxY)
+
+let points = {}
+
+for (let x=minX; x<=maxX; x++) {
+  for (let y=minY; y<=maxY; y++) {
+    let key = 'c' + x + 'x' + y
+    let minDistance = 10000
+    newCoord.forEach( (coord, index) => {
+      let distance = Math.abs(x - coord[0]) + Math.abs(y - coord[1])
+      if (distance < minDistance) {
+        minDistance = distance
+        points[key] = index
+      } else if (distance == minDistance) {
+        points[key] = '.'
+      }
+    })
+    
+  }
+}
+
+let area = {}
+
+for (let key in points) {
+  let areaKey = points[key]
+  if (area[areaKey]) {
+    area[areaKey]++
+  } else {
+    area[areaKey] = 1
+  }
+}
+
+let maxArea = 0
+
+for (let key in area) {
+  if (area[key] > maxArea) {
+    maxArea = area[key]
+  } 
+}
+
+console.log(maxArea)

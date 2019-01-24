@@ -38,11 +38,18 @@ class LinkedList {
     let log = ""
     do  {
       log += node.value + " "
+      if (node == currentNode) {
+        log += "!"
+      }
       node = node.next
     } while (node != this.head)
     console.log(log)
   }
 }
+
+let players = 10
+let last = 1618
+let scores = {}
 
 let currentNode = {}
 
@@ -50,11 +57,28 @@ let list = new LinkedList()
 
 list.addFirst(0)
 
-for (let i=1; i<=22; i++) {
+for (let i=1; i<=last; i++) {
+  let currentPlayer = "player" + ((i % (players)) == 0 ? players : i % (players))
   if (i % 23 != 0) {
     currentNode = currentNode.next
     list.addToCurrent(i)
+  } else {
+    currentNode = currentNode.prev.prev.prev.prev.prev.prev.prev
+    let current = list.removeCurrent()
+    if (scores[currentPlayer]) {
+      scores[currentPlayer] += current + i
+    } else {
+      scores[currentPlayer] = current + i
+    }
   }
 }
 
-list.log()
+let highScore = 0
+
+for (let player in scores) {
+  if (scores[player] > highScore) {
+    highScore = scores[player]
+  }
+}
+
+console.log(highScore)

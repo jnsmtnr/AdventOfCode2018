@@ -1,8 +1,34 @@
+let currentNode = {}
+
 class LinkedList {
   constructor() {
     this.head = null
     this.tail = null
   }
+
+  addFirst(value) {
+    let node = {}
+    node.value = value
+    node.next = null
+    node.prev = null
+    this.head = node
+    this.tail = node
+    currentNode = node
+  }
+
+  addToCurrent(value) {
+    let node = {}
+    node.value = value
+    node.next = currentNode.next
+    node.prev = currentNode
+    if (currentNode.next != null) {
+      currentNode.next.prev = node
+    }
+    currentNode.next = node
+    currentNode = node
+  }
+
+  /*
   addToHead(value) {
     let node = {}
     node.value = value
@@ -24,8 +50,8 @@ class LinkedList {
       this.tail.next = node
       this.tail = node
     }
-    
   }
+  */
 
   log() {
     let node = this.head
@@ -35,12 +61,20 @@ class LinkedList {
     } while (node != null)
 
   }
+
+  backLog() {
+    let node = this.tail
+    do {
+      console.log(node.value)
+      node = node.prev
+    } while (node != null)
+  }
 }
 
 let list = new LinkedList()
-list.addToTail(0)
-list.addToTail(1)
-list.addToTail(2)
-list.addToHead('head')
-list.addToTail(3)
+list.addFirst(0)
+list.addToCurrent(1)
+list.addToCurrent(2)
+currentNode = currentNode.prev
+list.addToCurrent(3)
 list.log()

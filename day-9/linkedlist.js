@@ -25,7 +25,9 @@ class LinkedList {
   removeCurrent() {
     currentNode.prev.next = currentNode.next
     currentNode.next.prev = currentNode.prev
-    
+    if (currentNode == this.head) {
+      this.head = currentNode.next
+    }
     currentNode = currentNode.next
   }
 

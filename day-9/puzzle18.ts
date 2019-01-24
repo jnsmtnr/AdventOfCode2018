@@ -17,7 +17,7 @@ let current = 0
 let i = 1
 let scores = {}
 
-while (i <= last) {
+while (i <= last * 100) {
   let currentPlayer = 'player' + ((i % (players)) == 0 ? players : i % (players))
   if (i % 23 != 0) {
     currentMarbleIndex += 2
@@ -37,6 +37,7 @@ while (i <= last) {
       scores[currentPlayer] = current + i
     }
   }
+  console.log(i)
   i++
 }
 let highScore = 0

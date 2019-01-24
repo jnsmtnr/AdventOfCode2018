@@ -17,6 +17,8 @@ let current = 0
 let i = 1
 let scores = {}
 
+let startTime = Date.now()
+
 while (i <= last) {
   let currentPlayer = 'player' + ((i % (players)) == 0 ? players : i % (players))
   if (i % 23 != 0) {
@@ -47,4 +49,7 @@ for (let player in scores) {
   }
 }
 
+let endTime = Date.now()
+
 console.log(highScore)
+console.log(endTime - startTime)

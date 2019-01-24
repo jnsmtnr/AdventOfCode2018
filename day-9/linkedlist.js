@@ -47,6 +47,8 @@ class LinkedList {
   }
 }
 
+let startTime = Date.now()
+
 let players = 412
 let last = 71646
 let scores = {}
@@ -81,4 +83,7 @@ for (let player in scores) {
   }
 }
 
+let endTime = Date.now()
+
 console.log(highScore)
+console.log(endTime - startTime)

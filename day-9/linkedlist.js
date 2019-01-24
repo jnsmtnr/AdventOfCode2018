@@ -28,26 +28,33 @@ class LinkedList {
     if (currentNode == this.head) {
       this.head = currentNode.next
     }
+    let value = currentNode.value
     currentNode = currentNode.next
+    return value
   }
 
   log() {
     let node = this.head
+    let log = ""
     do  {
-      console.log(node.value)
+      log += node.value + " "
       node = node.next
     } while (node != this.head)
-
+    console.log(log)
   }
 }
 
 let currentNode = {}
 
 let list = new LinkedList()
+
 list.addFirst(0)
-list.addToCurrent(1)
-list.addToCurrent(2)
-list.addToCurrent(3)
-currentNode = currentNode.next
-list.removeCurrent()
+
+for (let i=1; i<=22; i++) {
+  if (i % 23 != 0) {
+    currentNode = currentNode.next
+    list.addToCurrent(i)
+  }
+}
+
 list.log()

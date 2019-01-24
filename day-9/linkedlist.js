@@ -47,8 +47,8 @@ class LinkedList {
   }
 }
 
-let players = 10
-let last = 1618
+let players = 412
+let last = 71646
 let scores = {}
 
 let currentNode = {}
@@ -57,7 +57,7 @@ let list = new LinkedList()
 
 list.addFirst(0)
 
-for (let i=1; i<=last; i++) {
+for (let i=1; i<=last*100; i++) {
   let currentPlayer = "player" + ((i % (players)) == 0 ? players : i % (players))
   if (i % 23 != 0) {
     currentNode = currentNode.next

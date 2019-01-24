@@ -1,19 +1,15 @@
-let currentNode = {}
-
 class LinkedList {
   constructor() {
     this.head = null
-    this.tail = null
   }
 
   addFirst(value) {
     let node = {}
     node.value = value
-    node.next = null
-    node.prev = null
-    this.head = node
-    this.tail = node
+    node.next = node
+    node.prev = node
     currentNode = node
+    this.head = node
   }
 
   addToCurrent(value) {
@@ -21,60 +17,35 @@ class LinkedList {
     node.value = value
     node.next = currentNode.next
     node.prev = currentNode
-    if (currentNode.next != null) {
-      currentNode.next.prev = node
-    }
+    currentNode.next.prev = node
     currentNode.next = node
     currentNode = node
   }
 
-  /*
-  addToHead(value) {
-    let node = {}
-    node.value = value
-    node.next = this.head
-    this.head = node
-    if (this.tail == null) {
-      this.tail = node
-    }
+  removeCurrent() {
+    currentNode.prev.next = currentNode.next
+    currentNode.next.prev = currentNode.prev
+    
+    currentNode = currentNode.next
   }
-
-  addToTail(value) {
-    let node = {}
-    node.value = value
-    node.next = null
-    if (this.head == null) {
-      this.head = node
-      this.tail = node
-    } else {
-      this.tail.next = node
-      this.tail = node
-    }
-  }
-  */
 
   log() {
     let node = this.head
     do  {
       console.log(node.value)
       node = node.next
-    } while (node != null)
+    } while (node != this.head)
 
-  }
-
-  backLog() {
-    let node = this.tail
-    do {
-      console.log(node.value)
-      node = node.prev
-    } while (node != null)
   }
 }
+
+let currentNode = {}
 
 let list = new LinkedList()
 list.addFirst(0)
 list.addToCurrent(1)
 list.addToCurrent(2)
-currentNode = currentNode.prev
 list.addToCurrent(3)
+currentNode = currentNode.next
+list.removeCurrent()
 list.log()

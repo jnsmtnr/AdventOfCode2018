@@ -17,7 +17,7 @@ const ctx = c.getContext("2d");
 
 function drawPixel(x,y) {
   let newX = x + 100
-  let newY = -y + 450
+  let newY = y + 50
   ctx.fillRect(newX,newY,1,1);
 }
 

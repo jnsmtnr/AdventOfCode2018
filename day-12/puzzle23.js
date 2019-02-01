@@ -1,3 +1,5 @@
+// 20 gen result: 3738
+
 const fs = require('fs')
 
 const input = fs.readFileSync('input.txt', 'utf-8')
@@ -12,7 +14,7 @@ for (let i = 2; i < inputRows.length; i++) {
   next.push(row[2])
 }
 
-let pots = new Array(10).fill('.').concat(Array.from(startState)).concat(new Array(30).fill('.'))
+let pots = new Array(5).fill('.').concat(Array.from(startState)).concat(new Array(3).fill('.'))
 
 let gen = 1
 
@@ -30,15 +32,16 @@ while (gen <= 20) {
     }
   }
   pots = newPots
+  pots.push('.')
   gen++
-  console.log(pots.join(''))
+  console.log('gen left: ' + (20 - gen + 1))
 }
 
 let result = 0
 
 pots.forEach((value, index) => {
   if (value == "#") {
-    result += index - 10
+    result += index - 5
   }
 })
 
